@@ -1,9 +1,5 @@
-//Se crea en el terminal
-php artisan storage:link
-//No te olvides de las migraciones
-php artisan make:migration create_files_table
-Dentro de la migración:
-"use Illuminate\Database\Migrations\Migration;
+<?php
+use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
@@ -33,6 +29,4 @@ class CreateFilesTable extends Migration
         Schema::dropIfExists('files');
     }
 }
-"
-php artisan migrate
 

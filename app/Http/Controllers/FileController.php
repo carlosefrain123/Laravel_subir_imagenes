@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
@@ -18,9 +20,13 @@ class FileController extends Controller
                 'file'=>'required|image|max:2048'
             ]
         );
-        /* return $request->file('file'); */
-        //Mueve a la carpeta public/storage/imagenes
-        return $request->file('file')->store('public/imagenes');
+        //Almacenar la utrl en la Base de datos
+        $imagenes=$request->file('file')->store('public/imagenes');
+        $url=Storage::url($imagenes);
+        File::create([
+            'url'=>$url
+        ]);
+        return redirect()->route('admin.files.index');
     }
     public function show($file){
         return view('admin.files.show');
