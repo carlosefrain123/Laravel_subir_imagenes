@@ -25,8 +25,8 @@
                     </button>
 
                     <div  x-show="open" @click.away="open = false" class="mt-12 space-y-1 absolute right-0 w-48 bg-white border border-gray-200 rounded-md shadow-lg">
-                        <a href="{{route('admin.files.index')}}" class="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Opción 1</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Opción 2</a>
+                        <a href="{{route('admin.files.index')}}" class="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Imágenes</a>
+                        <a href="{{route('admin.files.create')}}" class="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Subir imágenes</a>
                         <a href="#" class="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">Opción 3</a>
                     </div>
                 </div>

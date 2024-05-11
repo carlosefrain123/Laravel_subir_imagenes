@@ -12,6 +12,14 @@ class FileController extends Controller
     public function create(){
         return view('admin.files.create');
     }
+    public function store(Request $request){
+        $request->validate(
+            [
+                'file'=>'required|image|max:2048'
+            ]
+        );
+        return $request->all();
+    }
     public function show($file){
         return view('admin.files.show');
     }
