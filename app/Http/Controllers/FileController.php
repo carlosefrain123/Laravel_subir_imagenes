@@ -19,8 +19,8 @@ class FileController extends Controller
             ]
         );
         /* return $request->file('file'); */
-        //Mueve a la carpeta storage
-        return $request->file('file')->store();
+        //Mueve a la carpeta public/storage/imagenes
+        return $request->file('file')->store('public/imagenes');
     }
     public function show($file){
         return view('admin.files.show');
