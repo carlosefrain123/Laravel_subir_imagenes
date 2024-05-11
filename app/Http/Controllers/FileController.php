@@ -18,7 +18,9 @@ class FileController extends Controller
                 'file'=>'required|image|max:2048'
             ]
         );
-        return $request->all();
+        /* return $request->file('file'); */
+        //Mueve a la carpeta storage
+        return $request->file('file')->store();
     }
     public function show($file){
         return view('admin.files.show');
