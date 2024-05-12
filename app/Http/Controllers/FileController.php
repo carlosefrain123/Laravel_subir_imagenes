@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
 
 class FileController extends Controller
 {
@@ -15,18 +16,12 @@ class FileController extends Controller
         return view('admin.files.create');
     }
     public function store(Request $request){
-        $request->validate(
-            [
-                'file'=>'required|image|max:2048'
-            ]
-        );
-        //Almacenar la utrl en la Base de datos
-        $imagenes=$request->file('file')->store('public/imagenes');
-        $url=Storage::url($imagenes);
-        File::create([
-            'url'=>$url
-        ]);
-        return redirect()->route('admin.files.index');
+
+        $nombre=$request->file('file')->getClientOriginalName();
+        return $nombre;
+        $ruta=storage_path().'\app\public\imagenes';
+        return $ruta;
+        ImageManager::make($request->file('file'))->save();
     }
     public function show($file){
         return view('admin.files.show');

@@ -35,4 +35,5 @@ class CreateFilesTable extends Migration
 }
 "
 php artisan migrate
-
+//Intervention sirve para bajar el peso de las imágenes
+ composer require intervention/image
