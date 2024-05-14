@@ -14,6 +14,8 @@ class CreateFilesTable extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('url');
             $table->timestamps(); // Esto agregará los campos 'created_at' y 'updated_at'
         });

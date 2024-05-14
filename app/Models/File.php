@@ -8,5 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class File extends Model
 {
     use HasFactory;
-    protected $fillable=['url'];
+    protected $fillable=['url','user_id'];
+    //Relación de uno a muchos inversa
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
