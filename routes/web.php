@@ -19,7 +19,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 /* Route::resource('/admin/files', FileController::class)->middleware('auth'); */
-Route::get('/admin/files', [FileController::class, 'index'])->name('admin.files.index');
+/* Route::get('/admin/files', [FileController::class, 'index'])->name('admin.files.index');
 Route::get('/admin/files/create', [FileController::class, 'create'])->name('admin.files.create');
-Route::post('/admin/files', [FileController::class, 'store'])->name('admin.files.store');
+Route::post('/admin/files', [FileController::class, 'store'])->name('admin.files.store'); */
+Route::middleware('auth')->group(function () {
+    Route::get('/admin/files', [FileController::class, 'index'])->name('admin.files.index');
+    Route::get('/admin/files/create', [FileController::class, 'create'])->name('admin.files.create');
+    Route::post('/admin/files', [FileController::class, 'store'])->name('admin.files.store');
+});
+
 require __DIR__.'/auth.php';
