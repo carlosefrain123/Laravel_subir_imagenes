@@ -8,6 +8,7 @@
                 </div>
             @endforeach
         </div>
+        {{$files->links()}}
     </div>
 @endsection
 

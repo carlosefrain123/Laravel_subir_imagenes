@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index(){
-        $files=File::all();
+        $files=File::paginate(4);
         return view('welcome',compact('files'));
     }
 }
