@@ -17,6 +17,8 @@
 
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/dropzone@5/dist/min/dropzone.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         Dropzone.options.myDropzone = {
             headers: {
@@ -25,7 +27,28 @@
             dictDefaultMessage: "Arrastre una imagen al recuadro para subirla",
             acceptedFiles: "image/*",
             maxFilesize: 2,
-            maxFiles: 4
+            maxFiles: 4,
+            successmultiple: function(files, response) {
+                // Mostrar SweetAlert después de la subida exitosa
+                Swal.fire(
+                    'Subida exitosa',
+                    'Sus imágenes fueron subidas con éxito.',
+                    'success'
+                );
+            },
+            init: function() {
+                this.on("success", function(file, response) {
+                    // Puedes manejar la respuesta individualmente si es necesario
+                });
+                this.on("queuecomplete", function() {
+                    // Mostrar SweetAlert después de que se complete la cola
+                    Swal.fire(
+                        'Subida exitosa',
+                        'Sus imágenes fueron subidas con éxito.',
+                        'success'
+                    );
+                });
+            }
         };
     </script>
 @endsection

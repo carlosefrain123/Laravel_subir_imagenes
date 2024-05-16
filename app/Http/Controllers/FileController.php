@@ -21,22 +21,30 @@ class FileController extends Controller
 
     public function store(Request $request)
     {
+        // Validar que al menos un archivo ha sido subido
         $request->validate([
             'file' => 'required|image|max:2048'
         ]);
 
-        $nombre = $request->file('file')->getClientOriginalName();
-        $ruta = $request->file('file')->storeAs('public/imagenes', $nombre);
+        // Procesar cada archivo subido
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $nombre = $file->getClientOriginalName();
+            $ruta = $file->storeAs('public/imagenes', $nombre);
 
-        $url = Storage::url($ruta);
+            $url = Storage::url($ruta);
 
-        File::create([
-            'user_id' => auth()->user()->id,
-            'url' => $url
-        ]);
+            // Crear registro en la base de datos
+            File::create([
+                'user_id' => auth()->user()->id,
+                'url' => $url
+            ]);
+        }
 
-        return redirect()->route('admin.files.index');
+        // Retornar una respuesta JSON
+        return response()->json(['success' => 'Archivos subidos correctamente']);
     }
+
 
     public function show($file)
     {
@@ -66,8 +74,9 @@ class FileController extends Controller
         $file->url = Storage::url($ruta);
         $file->save();
 
-        return redirect()->route('admin.files.index');
+        return redirect()->route('admin.files.edit', $file)->with('update', 'ok');
     }
+
 
     public function destroy(File $file)
     {
@@ -75,6 +84,6 @@ class FileController extends Controller
         Storage::delete($url);
         $file->delete();
 
-        return redirect()->route('admin.files.index');
+        return redirect()->route('admin.files.index')->with('eliminar', 'ok');
     }
 }
