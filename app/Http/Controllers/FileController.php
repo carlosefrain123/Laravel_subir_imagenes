@@ -42,9 +42,9 @@ class FileController extends Controller
     {
         return view('admin.files.show');
     }
-    public function edit($file)
+    public function edit(File $file)
     {
-        return view('admin.files.edit');
+        return view('admin.files.edit', compact('file'));
     }
     public function destroy($file)
     {

@@ -7,7 +7,7 @@
                     <div class="bg-white shadow-md rounded overflow-hidden">
                         <img src="{{ asset($file->url) }}" alt="" class="w-full h-48 object-cover">
                         <div class="p-4 border-t">
-                            <a href="" class="inline-block bg-blue-500 text-white py-2 px-4 rounded mr-2">Editar</a>
+                            <a href="{{route('admin.files.edit', $file)}}" class="inline-block bg-blue-500 text-white py-2 px-4 rounded mr-2">Editar</a>
                             <form action="" class="inline-block">
                                 <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded">Eliminar</button>
                             </form>
@@ -16,5 +16,6 @@
                 </div>
             @endforeach
         </div>
+        {{$files->links()}}
     </div>
 @endsection

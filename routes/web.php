@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/files', [FileController::class, 'index'])->name('admin.files.index');
     Route::get('/admin/files/create', [FileController::class, 'create'])->name('admin.files.create');
     Route::post('/admin/files', [FileController::class, 'store'])->name('admin.files.store');
+    Route::get('/admin/files/{file}/edit', [FileController::class, 'edit'])->name('admin.files.edit');
 });
 
 require __DIR__.'/auth.php';
